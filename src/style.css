@@ -1,0 +1,6 @@
+body {
+    /* background: red; */
+    touch-action: manipulation;
+    user-zoom: fixed;
+    zoom: reset;
+}
