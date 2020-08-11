@@ -17,8 +17,8 @@ class TipsHistoryButton extends Component {
     }
 
     _transition = () => {
-        this.props.actions.getTipsHistory()
-        // this.props.getTipsHistory()
+        // this.props.actions.getTipsHistory()
+        this.props.getTipsHistory()
         setTimeout(() => {this.props.transition("tipsHistory")}, 250)
     }
 

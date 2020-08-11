@@ -74,8 +74,24 @@ class Total extends Component {
                 let currentEnd = moment(snap.data().end, 'MMM Do ddd')
                 let today = moment(date, 'MMM Do ddd')
                 if(today.isAfter(currentEnd, 'days')) { // Compare today to the Global pay period.
-                    let start = currentStart.add(14, 'days').format('MMM Do ddd')
-                    let end = currentEnd.add(14, 'days').format('MMM Do ddd')
+
+                    // Find closest Sundays
+                    let lastSunday = moment(today).day(0);
+                    let nextSunday = moment(today).day(7);
+                    let start, end
+
+                    // Check if currentStart is even numbers difference from lastSunday
+                    if(!(moment(currentStart, 'MMM Do ddd').diff(lastSunday, 'weeks') % 2)) {
+                        start = lastSunday;
+                    } else {
+                        start = nextSunday;
+                    }
+
+                    end = moment(start, 'MMM Do ddd').add(14, 'days')
+
+                    
+                    // let start = currentStart.add(14, 'days').format('MMM Do ddd')
+                    // let end = currentEnd.add(14, 'days').format('MMM Do ddd')
                     this._startNewGlobalPayPeriod({ start ,end }) 
                     this._checkUserPayPeriod({ start , end })
                 } else {
